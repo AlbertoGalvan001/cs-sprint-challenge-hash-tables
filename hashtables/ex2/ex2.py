@@ -60,20 +60,25 @@ def reconstruct_trip(tickets, length):
     YOUR CODE HERE
     """
     # Your code here
+    # store root and destination info
     ticket_table = {}
-    route = []
+    # initialize list, store original source
+    route = ["NONE"] * length
 
-    for ticket in tickets:
-        if ticket.source not in ticket_table:
-            ticket_table[ticket.source] = ticket.destination
+    #iterate through each ticket and store
+    for t in tickets:
+        ticket_table[t.source] = t.destination
 
-    route.append(ticket_table["NONE"])   
+    #first ticket has NONE source
+    dest = ticket_table ["NONE"]
 
-    current_destination = route[0]    
+    #iterate  through each destination and add to array
+    for flight in range(length):
+        # record value
+        route[flight] = dest
 
-    while current_destination != "NONE":
-        current_destination = ticket_table[current_destination]
-        route.append(current_destination)
+        dest = ticket_table[dest]
+   
 
 
     return route

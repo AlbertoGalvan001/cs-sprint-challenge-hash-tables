@@ -36,17 +36,21 @@ def intersection(arrays):
     YOUR CODE HERE
     """
     # Your code here
+    #create empty cache
     number_cache = {}
+    #create empty list
     result = []
-
+    
+    # array is single list containing nums in list
     for array in arrays:
         for num in array:
             if num not in number_cache:
                 number_cache[num] = 1
 
         else:
+            #append num to the intersection list
             result.append(num)
-
+    # create a new list, without duplicates
     result = list(dict.fromkeys(result))        
 
     return result

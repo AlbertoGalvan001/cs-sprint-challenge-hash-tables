@@ -26,20 +26,24 @@ def get_indices_of_item_weights(weights, length, limit):
     YOUR CODE HERE
     """
     # Your code here
+    #create cache
     weight_dict = {}
 
-    for value, key in enumerate(weights):
-        if key not in weight_dict:
-            weight_dict[key] = [value]
-        else:
-            weight_dict[key].append(value)   
+    # If length is shorter than 2, return none.
+    if length <= 1:
+        return None
 
-    for weight in weight_dict:
-        if limit - weight in weight_dict:
-            if weight_dict[weight][0] > weight_dict[limit - weight][0]:
-                return (weight_dict[weight][0], weight_dict[limit - weight][0])
-            elif weight == limit - weight:
-                return (weight_dict[weight][1], weight_dict[weight][0])
-            else:
-                return (weight_dict[limit - weight][0], weight_dict[weight][0])                 
-    return None
+    for i in range(length):
+        current = weights[i] 
+        #check if the current weight is in weight_dict
+        if current in weight_dict:
+            # prev weight index = value, get index of prev
+            previous = weight_dict[current]  
+
+            return (i, previous) 
+        #weight_dict key is now the smaller weight needed to reach limit 
+        weight_dict[limit - weights[i]] = i
+
+    return None       
+
+   
